@@ -15,6 +15,8 @@
                     @endif
 
                     You are logged in as a user!
+                    <br />
+                    <a class="btn btn-primary"href="{{ route('user.books.index') }}">View Books </a>
                 </div>
             </div>
         </div>
