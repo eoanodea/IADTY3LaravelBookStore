@@ -23,6 +23,7 @@
                                     <th>Actions</th>
                                 </thead>
                                 <tbody>
+                                    
                                     @foreach ($books as $book)
                                         <tr data-id="{{ $book->id }}">
                                             <td>{{ $book->title }}</td>
