@@ -29,7 +29,7 @@
                                         <tr data-id="{{ $book->id }}">
                                             <td>{{ $book->title }}</td>
                                             <td>{{ $book->author }}</td>
-                                            <td>{{ $book->publisher }}</td>
+                                            <td>{{ $book->publisher->name }}</td>
                                             <td>{{ $book->year }}</td>
                                             <td>{{ $book->isbn }}</td>
                                             <td>{{ $book->price }}</td>

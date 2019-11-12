@@ -31,7 +31,17 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="publisher">Publisher</label>
-                                    <input type="text" class="form-control" id="publisher" name="publisher" value="{{ old('publisher', $book->publisher) }}"/>
+                                    <br />
+                                    <select name="publisher_id">
+                                        @foreach ($publishers as $publisher)
+                                            <option 
+                                                value={{ $publisher->id }} 
+                                                {{ (old('publisher_id', $book->publisher_id) == $publisher->id) 
+                                                    ? "selected" 
+                                                    : "" }}
+                                            >{{ $publisher->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="year">Year</label>
