@@ -41,8 +41,43 @@
                                 <input type="hidden" name="token" value="{{ csrf_token() }}">
                                 <button type="submit" class="form-control btn btn-danger">Delete</button>
                             </form>
-                        
                     </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h2>Reviews</h2>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        @if (count($reviews) == 0)
+                            <p>There are no reviews</p>
+                        @else
+                        <table class="table">
+                            <thead>
+                                <th>Title</th>
+                                <th>Body</th>
+                                <th>Actions</th>
+                            </thead>
+                            <tbody>
+                                @foreach ($reviews as $review)
+                                    <tr>
+                                        <td>{{ $review->title }}</td>
+                                        <td>{{ $review->body }}</td>
+                                        <td>
+                                        <form style="display:inline-block" method="POST" action="{{ route('admin.reviews.destroy', 
+                                        [ 'id' => $book->id, 'rid' => $review->id ]) }}">
+                                                <input type="hidden" name="_method" value="DELETE">
+                                                <input type="hidden" name="token" value="{{ csrf_token() }}">
+                                                <button type="submit" class="form-control btn btn-danger">Delete</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>    
+                        @endif
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

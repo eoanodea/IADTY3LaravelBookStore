@@ -28,6 +28,11 @@ Route::get('/admin/books/{id}/edit', 'Admin\BookController@edit')->name('admin.b
 Route::put('/admin/books/{id}', 'Admin\BookController@update')->name('admin.books.update');
 Route::delete('/admin/books/{id}', 'Admin\BookController@destroy')->name('admin.books.destroy');
 
-Route::get('/user/books', 'user\BookController@index')->name('user.books.index');
-Route::get('/user/books/{id}', 'user\BookController@show')->name('user.books.show');
+Route::delete('/admin/books/{id}/reviews/{rid}', 'Admin\ReviewController@destroy')->name('admin.reviews.destroy');
+
+Route::get('/user/books', 'User\BookController@index')->name('user.books.index');
+Route::get('/user/books/{id}', 'User\BookController@show')->name('user.books.show');
+
+Route::get('/user/books/{id}/reviews/create', 'User\ReviewController@create')->name('user.reviews.create');
+Route::post('/user/books/{id}/reviews/store', 'User\ReviewController@store')->name('user.reviews.store');
 

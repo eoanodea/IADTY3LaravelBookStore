@@ -35,9 +35,11 @@ class BookController extends Controller
     public function show($id)
     {
         $book = Book::findOrFail($id);
+        $reviews = $book->reviews()->get();
 
         return view('user.books.show')->with([
-            'book' => $book
+            'book' => $book,
+            'reviews' => $reviews
         ]);
     }
 

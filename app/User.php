@@ -40,6 +40,9 @@ class User extends Authenticatable
     public function roles() {
         return $this->belongsToMany('App\Role', 'user_role');
     }
+    public function reviews() {
+        return $this->hasMany('App\Review');
+    }
     public function authorizeRoles($roles) {
         if(is_array($roles)) {
             return $this->hasAnyRoles($roles) || abort(401, 'This action is unauthorized');

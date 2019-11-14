@@ -22,7 +22,7 @@
                                         </tr>
                                         <tr>
                                             <td>Publisher</td>
-                                            <td>{{ $book->publisher }}</td>
+                                            <td>{{ $book->publisher->name}}</td>
                                         </tr>
                                         <tr>
                                             <td>Year</td>
@@ -35,7 +35,19 @@
                                     </tbody>
                             </table>
                             <a href="{{ route('user.books.index', $book->id) }}" class="btn btn-default">Back</a>
-                        
+                            <br />
+                            <h2>Reviews
+                            <a href="{{ route('user.reviews.create', $book->id) }}" class="btn btn-primary">Add</a>
+                            </h2>
+                            <ul>
+                                @if (count($reviews) == 0)
+                                    <p>There are no reviews</p>
+                                @else
+                                    @foreach ($reviews as $review)
+                                        <li>{{ $review->title }}</li>
+                                    @endforeach
+                                @endif
+                            </ul>
                     </div>
             </div>
         </div>
