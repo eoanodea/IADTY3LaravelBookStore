@@ -29,5 +29,16 @@ class UsersTableSeeder extends Seeder
         $user->password = bcrypt('testtest');
         $user->save();
         $user->roles()->attach($role_user);
+
+        $faker = \Faker\Factory::create();
+
+        for($i = 0; $i < 10; $i++) {
+            $user = new User();
+            $user->name = $faker->firstName . ' ' . $faker->lastName;
+            $user->email = $faker->email;
+            $user->password = bcrypt($faker->password);
+            $user->save();
+            $user->roles()->attach($role_user);
+        }
     }
 }
