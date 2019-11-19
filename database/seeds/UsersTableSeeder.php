@@ -30,15 +30,8 @@ class UsersTableSeeder extends Seeder
         $user->save();
         $user->roles()->attach($role_user);
 
-        $faker = \Faker\Factory::create();
-
-        for($i = 0; $i < 10; $i++) {
-            $user = new User();
-            $user->name = $faker->firstName . ' ' . $faker->lastName;
-            $user->email = $faker->email;
-            $user->password = bcrypt($faker->password);
-            $user->save();
-            $user->roles()->attach($role_user);
-        }
+        factory(App\User::class, 20)->create()->each(function($user) {
+            $user->roles()->attach(Role::where('name', 'user')->first());
+        });
     }
 }

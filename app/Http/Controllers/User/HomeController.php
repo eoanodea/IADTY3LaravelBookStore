@@ -20,5 +20,6 @@ class HomeController extends Controller
         return view('user.home')->with([
             'user'=> $user
         ]);
+        // return view('user.home')
     }
 }
