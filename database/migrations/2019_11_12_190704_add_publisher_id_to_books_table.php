@@ -29,7 +29,7 @@ class AddPublisherIdToBooksTable extends Migration
     public function down()
     {
         Schema::table('books', function (Blueprint $table) {
-            $table->dropForeign('publisher_id');
+            $table->dropForeign(['publisher_id']);
             $table->dropColumn('publisher_id');
 
             $table->string('publisher');
