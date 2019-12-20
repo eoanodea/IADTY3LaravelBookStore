@@ -10,6 +10,8 @@
                     </div>
                     <div class="card-body">
                         
+                    <img src="{{ asset('storage/covers/' . $book->cover) }}" alt="{{ $book->title }}" />
+
                             <table id="table-books" class="table table-hover">
                                 <tbody>
                                         <tr>

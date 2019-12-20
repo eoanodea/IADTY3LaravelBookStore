@@ -18,8 +18,12 @@
                                     </ul>
                                 </div>
                             @endif
-                            <form method="POST" action="{{ route('admin.books.store') }}">
+                            <form method="POST" enctype="multipart/form-data" action="{{ route('admin.books.store') }}">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <div class="form-group">
+                                    <label for="cover">Cover Image</label>
+                                    <input type="file" class="form-control" id="cover" name="cover"/>
+                                </div>
                                 <div class="form-group">
                                     <label for="title">Title</label>
                                     <input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}"/>

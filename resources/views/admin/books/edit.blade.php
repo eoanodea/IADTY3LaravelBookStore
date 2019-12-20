@@ -9,6 +9,7 @@
                             Edit book
                         </div>
                         <div class="card-body">
+                            <img src="{{ asset('storage/covers/' . $book->cover) }}" alt="{{ $book->title }}" />
                             @if ($errors->any())
                                 <div class="alert alert-danger">
                                     <ul>
@@ -18,9 +19,13 @@
                                     </ul>
                                 </div>
                             @endif
-                            <form method="POST" action="{{ route('admin.books.update', $book->id) }}">
-                                    <input type="hidden" name="_method" value="PUT">
+                            <form method="POST" enctype="multipart/form-data" action="{{ route('admin.books.update', $book->id) }}">
+                                <input type="hidden" name="_method" value="PUT">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <div class="form-group">
+                                    <label for="cover">Cover Image</label>
+                                    <input type="file" class="form-control" id="cover" name="cover"/>
+                                </div>
                                 <div class="form-group">
                                     <label for="title">Title</label>
                                     <input type="text" class="form-control" id="title" name="title" value="{{ old('title', $book->title) }}"/>
