@@ -13,6 +13,13 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::middleware('api')->group(function() {
+    Route::get('/books', 'API\BookController@index');
+    Route::get('/books/{$id}', 'API\BookController@show');
+    Route::post('/books', 'API\BookController@create');
+    Route::put('/books', 'API\BookController@create');
 });
