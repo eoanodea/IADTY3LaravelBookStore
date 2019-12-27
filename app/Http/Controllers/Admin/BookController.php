@@ -81,6 +81,8 @@ class BookController extends Controller
 
         $book->save();
 
+        $request->session()->flash('success', 'Book added successfully');
+
         return redirect()->route('admin.books.index');
 
     }
@@ -159,22 +161,27 @@ class BookController extends Controller
 
         $book->save();
 
+        $request->session()->flash('info', 'Book updated successfully');
+
         return redirect()->route('admin.books.index');
     }
 
     /**
      * Remove the specified resource from storage.
-     *
+     * 
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $book = Book::findOrFail($id);
         
         Storage::delete("public/covers/{$book->cover}");
         
         $book->delete();
+
+        $request->session()->flash('danger', 'Deleted book');
 
         return redirect()->route('admin.books.index');
     }
