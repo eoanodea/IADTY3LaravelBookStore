@@ -17,22 +17,25 @@ Route::get('/about', 'PageController@about')->name('about');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/admin/home', 'Admin\HomeController@index')->name('admin.home');
-Route::get('/user/home', 'User\HomeController@index')->name('user.home');
 
-Route::get('/admin/books', 'Admin\BookController@index')->name('admin.books.index');
-Route::get('/admin/books/create', 'Admin\BookController@create')->name('admin.books.create');
-Route::get('/admin/books/{id}', 'Admin\BookController@show')->name('admin.books.show');
-Route::post('/admin/books/store', 'Admin\BookController@store')->name('admin.books.store');
-Route::get('/admin/books/{id}/edit', 'Admin\BookController@edit')->name('admin.books.edit');
-Route::put('/admin/books/{id}', 'Admin\BookController@update')->name('admin.books.update');
-Route::delete('/admin/books/{id}', 'Admin\BookController@destroy')->name('admin.books.destroy');
+Route::group(['prefix' => '/admin', 'as' => 'admin.'], function() {
+    Route::get('/home', 'Admin\HomeController@index')->name('home');
+    Route::get('/books', 'Admin\BookController@index')->name('books.index');
+    Route::get('/books/create', 'Admin\BookController@create')->name('books.create');
+    Route::get('/books/{id}', 'Admin\BookController@show')->name('books.show');
+    Route::post('/books/store', 'Admin\BookController@store')->name('books.store');
+    Route::get('/books/{id}/edit', 'Admin\BookController@edit')->name('books.edit');
+    Route::put('/books/{id}', 'Admin\BookController@update')->name('books.update');
+    Route::delete('/books/{id}', 'Admin\BookController@destroy')->name('books.destroy');
+    Route::delete('/books/{id}/reviews/{rid}', 'Admin\ReviewController@destroy')->name('reviews.destroy');
+});
 
-Route::delete('/admin/books/{id}/reviews/{rid}', 'Admin\ReviewController@destroy')->name('admin.reviews.destroy');
+Route::group(['prefix' => '/user', 'as' => 'user.'], function() {
+    Route::get('/home', 'User\HomeController@index')->name('home');
+    Route::get('/books', 'User\BookController@index')->name('books.index');
+    Route::get('/books/{id}', 'User\BookController@show')->name('books.show');
+    Route::get('/books/{id}/reviews/create', 'User\ReviewController@create')->name('reviews.create');
+    Route::post('/books/{id}/reviews/store', 'User\ReviewController@store')->name('reviews.store');
+});
 
-Route::get('/user/books', 'User\BookController@index')->name('user.books.index');
-Route::get('/user/books/{id}', 'User\BookController@show')->name('user.books.show');
-
-Route::get('/user/books/{id}/reviews/create', 'User\ReviewController@create')->name('user.reviews.create');
-Route::post('/user/books/{id}/reviews/store', 'User\ReviewController@store')->name('user.reviews.store');
 
